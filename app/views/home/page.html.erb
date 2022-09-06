@@ -1,1 +1,8 @@
 <h2>this is the first page of home page </h2>
+<ul>
+  <% @karthik.each do |i| %>
+    <li>
+      <%= i.value %>
+    </li>
+  <% end %>
+</ul>

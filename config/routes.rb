@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  resources :friends
+  get 'articles/index'
   root 'home#index'
   get 'home/page'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :friends
+  resources :home
+  resources :articles
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  get "articles/index"
+  # get "/articles/:id", to: "articles#show"
+
 end

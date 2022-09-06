@@ -1,2 +1,11 @@
 <h1>this is home page</h1>
 
+<ul>
+  <% @values.each do |home| %>
+    <li>
+      <%= home.box %>
+    </li>
+  <% end %>
+</ul>
+
+
