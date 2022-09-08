@@ -1,3 +1,3 @@
 class User < ApplicationRecord
-    validates :name, presence: true
+    validates :name, format:{with: /[a-z]/,message: "enter something"}
 end
