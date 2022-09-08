@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
-  get 'articles/index'
-  root 'home#index'
+  root 'articles#index'
   get 'home/page'
   resources :friends
   resources :home
-  resources :articles
-
-  get "articles/index"
-  # get "/articles/:id", to: "articles#show"
+  resources :articles do
+    resources :comments
+  end
 
 end

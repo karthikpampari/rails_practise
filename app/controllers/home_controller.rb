@@ -7,3 +7,6 @@ class HomeController < ApplicationController
     @karthik=Home.all
   end
 end
+
+
+ 
