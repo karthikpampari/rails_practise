@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_08_065224) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_13_070627) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -27,6 +27,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_08_065224) do
     t.datetime "updated_at", null: false
     t.string "status"
     t.index ["article_id"], name: "index_comments_on_article_id"
+  end
+
+  create_table "distributions", force: :cascade do |t|
+    t.integer "manufacturer_id"
+    t.integer "reseller_id"
+    t.integer "product_id"
+    t.integer "units_sold"
+    t.decimal "unit_price"
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friends", force: :cascade do |t|
@@ -50,13 +61,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_08_065224) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "manufacturers", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "manufacturers_resellers", id: false, force: :cascade do |t|
+    t.integer "manufacturer_id", null: false
+    t.integer "reseller_id", null: false
+  end
+
+  create_table "product_tokens", force: :cascade do |t|
+    t.integer "token"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.string "part_number"
+    t.string "model"
+    t.integer "price"
+    t.integer "manufacturer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id", null: false
-    t.index ["user_id"], name: "index_products_on_user_id"
   end
 
   create_table "products_users", id: false, force: :cascade do |t|
@@ -64,15 +88,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_08_065224) do
     t.integer "product_id", null: false
   end
 
+  create_table "resellers", force: :cascade do |t|
+    t.string "name"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "age"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "Job"
-    t.string "gender"
   end
 
   add_foreign_key "comments", "articles"
-  add_foreign_key "products", "users"
 end
